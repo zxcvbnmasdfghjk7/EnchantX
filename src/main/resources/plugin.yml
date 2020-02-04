@@ -1,0 +1,11 @@
+name: CNE
+version: ${project.version}
+main: io.github.eddiediamondfire.cne.CNE
+api-version: 1.13
+commands:
+  enchant:
+    usage: /enchant
+    description: Enchant a Custom Item
+  cne:
+    usage: /cne
+    description: Main Command of Custom N' Enchanting
