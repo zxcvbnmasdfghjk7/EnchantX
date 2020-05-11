@@ -5,21 +5,16 @@ import io.github.eddiediamondfire.cne.Commands.SCCMD.cne.InfoSubCommand;
 import io.github.eddiediamondfire.cne.Commands.SubCommandWrappers.SubCommandCNE;
 import io.github.eddiediamondfire.cne.Ultils.CEnchantment;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class CMDManager implements CommandExecutor {
+public class MainCMDManager implements CommandExecutor {
 
     private static CNE plugin = CNE.getInstance();
     public static ArrayList<SubCommandCNE> subCommandCNE = new ArrayList<>();
@@ -30,7 +25,6 @@ public class CMDManager implements CommandExecutor {
 
     public void loadCommands(){
         plugin.getCommand(cne).setExecutor(this);
-        plugin.getCommand(enchant).setExecutor(this);
         subCommandCNE.add(new InfoSubCommand());
     }
     
@@ -73,6 +67,18 @@ public class CMDManager implements CommandExecutor {
 
             if(command.getName().equalsIgnoreCase(enchant)){
 
+                if(args.length == 1){
+                    try{
+                        int level = Integer.parseInt(args[2]);
+                        Enchantment enchantment  = Enchantment.getByName(args[1]);
+
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }else{
+                    player.sendMessage("Not Enough Arguments");
+                    return true;
+                }
             }
         }
         return false;

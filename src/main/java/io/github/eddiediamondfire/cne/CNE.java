@@ -1,6 +1,6 @@
 package io.github.eddiediamondfire.cne;
 
-import io.github.eddiediamondfire.cne.Commands.CMDManager;
+import io.github.eddiediamondfire.cne.Commands.MainCMDManager;
 import io.github.eddiediamondfire.cne.Listener.PlayerEvents;
 import io.github.eddiediamondfire.cne.Ultils.CEnchantment;
 import io.github.eddiediamondfire.cne.Listener.EnchantmentEvents.Weapons;
@@ -17,7 +17,7 @@ public class CNE extends JavaPlugin {
     }
 
     public static CustomEnchantWrapper customEnchantWrapper;
-    private CMDManager command;
+    private MainCMDManager mainCmdManagerCommand;
 
     public static String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "Custom" + ChatColor.YELLOW + " N' " + ChatColor.GOLD + "Enchanting" + ChatColor.GRAY + "]";
 
@@ -28,7 +28,7 @@ public class CNE extends JavaPlugin {
         this.loadListeners();
         this.registerEnchantments();
         this.loadConfig();
-        command.loadCommands();
+        mainCmdManagerCommand.loadCommands();
 
     }
 
@@ -50,7 +50,7 @@ public class CNE extends JavaPlugin {
     }
 
     private void instanceClasses(){
-        command = new CMDManager();
+        mainCmdManagerCommand = new MainCMDManager();
     }
 
     private void registerEnchantments(){

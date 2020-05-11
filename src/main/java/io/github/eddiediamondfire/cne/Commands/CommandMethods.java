@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class CommandMethods {
 
     public static SubCommandCNE get(String name) {
-        Iterator<SubCommandCNE> subcommands = CMDManager.subCommandCNE.iterator();
+        Iterator<SubCommandCNE> subcommands = MainCMDManager.subCommandCNE.iterator();
 
         while (subcommands.hasNext()) {
             SubCommandCNE sc = (SubCommandCNE) subcommands.next();
