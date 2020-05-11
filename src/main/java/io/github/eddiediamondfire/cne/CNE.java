@@ -1,7 +1,6 @@
 package io.github.eddiediamondfire.cne;
 
 import io.github.eddiediamondfire.cne.Commands.CMDManager;
-import io.github.eddiediamondfire.cne.CoolDowns.CoolDownManager;
 import io.github.eddiediamondfire.cne.Listener.PlayerEvents;
 import io.github.eddiediamondfire.cne.Ultils.CEnchantment;
 import io.github.eddiediamondfire.cne.Listener.EnchantmentEvents.Weapons;
@@ -19,7 +18,6 @@ public class CNE extends JavaPlugin {
 
     public static CustomEnchantWrapper customEnchantWrapper;
     private CMDManager command;
-    private CoolDownManager cd;
 
     public static String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "Custom" + ChatColor.YELLOW + " N' " + ChatColor.GOLD + "Enchanting" + ChatColor.GRAY + "]";
 
@@ -53,7 +51,6 @@ public class CNE extends JavaPlugin {
 
     private void instanceClasses(){
         command = new CMDManager();
-        cd = new CoolDownManager();
     }
 
     private void registerEnchantments(){
