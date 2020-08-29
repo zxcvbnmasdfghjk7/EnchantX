@@ -1,6 +1,6 @@
 package io.github.eddiediamondfire.cne.Ultils;
 
-import io.github.eddiediamondfire.cne.Enchantments.*;
+import io.github.eddiediamondfire.cne.Enchantments.Weapons.*;
 import org.bukkit.Keyed;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
@@ -116,4 +116,6 @@ public class CEnchantment implements Listener {
         }
         return 0;
     }
+
+
 }

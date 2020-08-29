@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="original-NetworkCore-1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Forge/NetworkCore/target/original-NetworkCore-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

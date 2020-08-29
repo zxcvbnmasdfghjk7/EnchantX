@@ -1,0 +1,12 @@
+io.github.eddiediamondfire.cne
+io.github.eddiediamondfire.cne.API
+io.github.eddiediamondfire.cne.Commands
+io.github.eddiediamondfire.cne.Commands.SCCMD.cne
+io.github.eddiediamondfire.cne.Commands.SubCommandWrappers
+io.github.eddiediamondfire.cne.EnchantAbilities
+io.github.eddiediamondfire.cne.EnchantItems
+io.github.eddiediamondfire.cne.EnchantItems.Recipes
+io.github.eddiediamondfire.cne.Enchantments.Weapons
+io.github.eddiediamondfire.cne.Listener
+io.github.eddiediamondfire.cne.Ultils
+io.github.eddiediamondfire.cne.Wrapper

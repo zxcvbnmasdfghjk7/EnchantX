@@ -1,9 +1,14 @@
 package io.github.eddiediamondfire.cne;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import io.github.eddiediamondfire.cne.Commands.MainCMDManager;
 import io.github.eddiediamondfire.cne.Listener.PlayerEvents;
 import io.github.eddiediamondfire.cne.Ultils.CEnchantment;
-import io.github.eddiediamondfire.cne.Listener.EnchantmentEvents.Weapons;
+import io.github.eddiediamondfire.cne.EnchantAbilities.Weapons;
 import io.github.eddiediamondfire.cne.Wrapper.CustomEnchantWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +23,7 @@ public class CNE extends JavaPlugin {
 
     public static CustomEnchantWrapper customEnchantWrapper;
     private MainCMDManager mainCmdManagerCommand;
+    public DependencyChecker dependency;
 
     public static String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "Custom" + ChatColor.YELLOW + " N' " + ChatColor.GOLD + "Enchanting" + ChatColor.GRAY + "]";
 
@@ -29,7 +35,7 @@ public class CNE extends JavaPlugin {
         this.registerEnchantments();
         this.loadConfig();
         mainCmdManagerCommand.loadCommands();
-
+        dependency.loadDependency();
     }
 
     @Override
@@ -70,4 +76,5 @@ public class CNE extends JavaPlugin {
 
         Bukkit.getServer().getConsoleSender().sendMessage(PREFIX + ChatColor.RED + " Enchantments Successfully Disabled");
     }
+
 }
