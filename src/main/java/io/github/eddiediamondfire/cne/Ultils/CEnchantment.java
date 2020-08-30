@@ -1,15 +1,16 @@
 package io.github.eddiediamondfire.cne.Ultils;
 
 import io.github.eddiediamondfire.cne.Enchantments.Weapons.*;
+import org.bukkit.ChatColor;
 import org.bukkit.Keyed;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class CEnchantment implements Listener {
 
@@ -27,6 +28,9 @@ public class CEnchantment implements Listener {
 
     // Summons Guards when a enemy attacks or a player attacks a enemy
     public static Enchantment VANGUARD = new Vanguard();
+
+    // Pickpockets cash from a Victum
+    public static Enchantment PICKPOCKET = new PickPocket();
 
     @SuppressWarnings("unchecked")
     public static void unregisterEnchantments(Enchantment enchantment) {
@@ -117,5 +121,19 @@ public class CEnchantment implements Listener {
         return 0;
     }
 
+    public void applyEnchantmentToItem(Player player, Enchantment enchantment, int level, ChatColor colour){
+        try{
+            ItemStack item = player.getInventory().getItemInMainHand();
+            ItemMeta meta = item.getItemMeta();
+            List<String> lore = new ArrayList<>();
+
+            item.addEnchantment(enchantment, level);
+            lore.add(colour + CEnchantment.returnEnchantmentName(enchantment, level));
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+        }catch (NumberFormatException e){
+        }catch (Exception e){
+        }
+    }
 
 }
