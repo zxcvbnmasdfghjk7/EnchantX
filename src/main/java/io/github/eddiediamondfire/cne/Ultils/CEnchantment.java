@@ -14,24 +14,39 @@ import java.util.*;
 
 public class CEnchantment implements Listener {
 
-    // Enchantments
-    // To steal enemys health
+    /**
+    * Steal a entity's health and add to the player
+     */
     public static Enchantment LIFESTEAL = new LifeSteal();
-    // Causes an Explosion when hitting an enemy
+    /**
+    *  Causes an Explosion when applied to an entity
+     */
     public static Enchantment EXPLOSION = new Explosion();
 
-    // Strikes Lightning on an Enemy
+    /**
+    * To strike lightening on the entity when the method is used
+     */
     public static Enchantment THUNDERLORD = new ThunderLord();
 
-    // Has a good chance of one shotting an enemy
+    /**
+    * Has a good chance of one shotting the entity
+     */
     public static Enchantment ONESHOT = new OneShot();
 
-    // Summons Guards when a enemy attacks or a player attacks a enemy
+    /**
+    * Will summon NPC when a entity attacks the player
+     */
     public static Enchantment VANGUARD = new Vanguard();
 
-    // Pickpockets cash from a Victum
+    /**
+    * Steals money from a enemy player and adds the balance to the players bank account. Requires Vault Dependency
+     */
     public static Enchantment PICKPOCKET = new PickPocket();
 
+    /**
+    * Will unregister the Custom Enchantment registered on the server
+     * @param enchantment To register the Customized Enchantment using the Bukkit Class
+     */
     @SuppressWarnings("unchecked")
     public static void unregisterEnchantments(Enchantment enchantment) {
         try {
@@ -58,6 +73,10 @@ public class CEnchantment implements Listener {
         }
     }
 
+    /**
+    * Will register the Custom Enchantment that is not been registed yet, most prefered when the Server loads up
+     * @param enchantment To register the Customized Enchantment using the Bukkit Class
+     */
     public static void registerEnchantments(Enchantment enchantment) {
         try {
             try {
@@ -78,8 +97,16 @@ public class CEnchantment implements Listener {
         }
     }
 
-    // Use ChatColor.Grey + EnchantMechanics.returnEnchantmentName(enchantment, enchantlevel)
+    /**
+     * Using Roman Numeralds to display once registered on the item
+     */
     private static final String[] NUMERALS = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" };
+    /**
+     * Will apply a String lore that contains the Enchantment on the Item. Use ChatColor.GREY + CEnchantment.returnEnchantmentName(Enchantment enchantment, int enchantmentLevel)
+     * @param ench Sets the enchantment onto an item as a lore
+     * @param enchLevel Sets the enchantment level onto an item as lore on String
+     * @return Returns the enchantment and level in String Form as Roman Numerals.
+     */
     public static String returnEnchantmentName(Enchantment ench, int enchLevel){
         if(enchLevel == 1 && ench.getMaxLevel() == 1){
             return ench.getName();
@@ -90,7 +117,12 @@ public class CEnchantment implements Listener {
         return ench.getName() + " " + NUMERALS[enchLevel- 1];
     }
 
-    // ItemMeta#hasEnchant() may also work for this function
+    /**
+    * @return Checks if the item contains this type of Enchantment. Note: ItemMeta.hasEnchant() may also work for this function.
+    * It may serve as a replacement but ItemMeta.hasEnchant() but it may break if ItemMeta.hasEnchant() is used to check a Custom Enchantment from another Plugin WARNING!
+     * @param item Gets the item on the players hand.
+     * @param enchant Gets the enchantment where they need to check if it contains the enchantment.
+     */
     public static boolean hasEnchantment(ItemStack item, Enchantment enchant){
         if(item.getItemMeta() != null) {
             item.getItemMeta().getEnchants();
@@ -105,7 +137,12 @@ public class CEnchantment implements Listener {
         }
         return false;
     }
-    // ItemMeta#getEnchantLevel() may also work for this function
+    /**
+    * @return Returns the Level of the Custom Enchantment that is allowed by the Enchantment.getMaxLevel().
+    * ItemMeta.getEnchantLevel() may work for this function. It may break if this plugin is used to get the Custom Enchantment from another plugin WARNING!
+     * @param item Gets the item on the players hand.
+     * @param enchant Identifies the enchantment so it can identify the Enchantment Level.
+;     */
     public static int getLevel(ItemStack item, Enchantment enchant){
         if(item.getItemMeta() != null) {
             item.getItemMeta().getEnchants();
@@ -121,6 +158,14 @@ public class CEnchantment implements Listener {
         return 0;
     }
 
+    /**
+    * @deprecated due to the constant breaks when the method is used. No alternatives for this function.
+     * @param player Player object
+     * @param enchantment Gets the Enchantment
+     * @param level gets the enchantment level
+     * @param colour Sets the colour of the lore.
+     */
+    @Deprecated
     public void applyEnchantmentToItem(Player player, Enchantment enchantment, int level, ChatColor colour){
         try{
             ItemStack item = player.getInventory().getItemInMainHand();

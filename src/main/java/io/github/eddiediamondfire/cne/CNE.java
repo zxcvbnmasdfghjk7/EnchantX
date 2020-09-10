@@ -10,6 +10,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
+/*
+* Licensed under Apache!
+*
+ */
 public class CNE extends JavaPlugin {
     public static CNE instance;
     public static CNE getInstance(){
