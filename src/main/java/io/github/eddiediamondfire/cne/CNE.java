@@ -1,10 +1,9 @@
 package io.github.eddiediamondfire.cne;
 
-import io.github.eddiediamondfire.cne.Commands.CMDManager;
-import io.github.eddiediamondfire.cne.CoolDowns.CoolDownManager;
 import io.github.eddiediamondfire.cne.Listener.PlayerEvents;
+import io.github.eddiediamondfire.cne.NewCommandManager.MainCommands.CommandManager;
 import io.github.eddiediamondfire.cne.Ultils.CEnchantment;
-import io.github.eddiediamondfire.cne.Listener.EnchantmentEvents.Weapons;
+import io.github.eddiediamondfire.cne.EnchantAbilities.Weapons;
 import io.github.eddiediamondfire.cne.Wrapper.CustomEnchantWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,20 +17,19 @@ public class CNE extends JavaPlugin {
     }
 
     public static CustomEnchantWrapper customEnchantWrapper;
-    private CMDManager command;
-    private CoolDownManager cd;
+    public DependencyChecker dependency;
+    private CommandManager cm = new CommandManager();
 
     public static String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "Custom" + ChatColor.YELLOW + " N' " + ChatColor.GOLD + "Enchanting" + ChatColor.GRAY + "]";
 
     @Override
     public void onEnable() {
         instance = this;
-        this.instanceClasses();
         this.loadListeners();
         this.registerEnchantments();
         this.loadConfig();
-        command.loadCommands();
-
+        cm.loadCommands();
+        dependency.loadDependency();
     }
 
     @Override
@@ -51,16 +49,12 @@ public class CNE extends JavaPlugin {
         pm.registerEvents(new PlayerEvents(), this);
     }
 
-    private void instanceClasses(){
-        command = new CMDManager();
-        cd = new CoolDownManager();
-    }
-
     private void registerEnchantments(){
         CEnchantment.registerEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.EXPLOSION);
         CEnchantment.registerEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.THUNDERLORD);
         CEnchantment.registerEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.ONESHOT);
         CEnchantment.registerEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.LIFESTEAL);
+        CEnchantment.registerEnchantments(CEnchantment.PICKPOCKET);
 
         Bukkit.getServer().getConsoleSender().sendMessage(PREFIX + ChatColor.GREEN + " Enchantments Successfully Enabled");
     }
@@ -70,7 +64,9 @@ public class CNE extends JavaPlugin {
         CEnchantment.unregisterEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.THUNDERLORD);
         CEnchantment.unregisterEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.ONESHOT);
         CEnchantment.unregisterEnchantments(io.github.eddiediamondfire.cne.Ultils.CEnchantment.LIFESTEAL);
+        CEnchantment.unregisterEnchantments(CEnchantment.PICKPOCKET);
 
         Bukkit.getServer().getConsoleSender().sendMessage(PREFIX + ChatColor.RED + " Enchantments Successfully Disabled");
     }
+
 }
