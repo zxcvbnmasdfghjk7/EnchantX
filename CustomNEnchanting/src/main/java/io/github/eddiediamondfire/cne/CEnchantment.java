@@ -12,15 +12,12 @@ import java.util.*;
 public class CEnchantment {
 
     private final CNE plugin;
-    private final List<Enchantment> enchants;
     private static final String[] NUMERALS = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
 
     public final static Enchantment EXPLOSIVE = new Explosive();
 
     public CEnchantment(CNE plugin){
         this.plugin = plugin;
-        enchants = new ArrayList<>();
-        enchants.add(new Explosive());
     }
 
     /**
@@ -73,10 +70,10 @@ public class CEnchantment {
         return ench.getName() + " " + NUMERALS[enchLevel- 1];
     }
 
-    public void registerEnchantment(){
+    public void registerEnchantment(Enchantment enchantment){
         try{
             try{
-                Field field = Enchantment.class.getField("acceptingNew");
+                Field field = Enchantment.class.getDeclaredField("acceptingNew");
                 field.setAccessible(true);
                 field.set(null, true);
             }catch (Exception e){
@@ -84,9 +81,7 @@ public class CEnchantment {
             }
 
             try{
-                for(Enchantment enchantment: enchants){
-                    Enchantment.registerEnchantment(enchantment);
-                }
+                Enchantment.registerEnchantment(enchantment);
             }catch (IllegalArgumentException e){
                 e.printStackTrace();
             }
@@ -95,7 +90,7 @@ public class CEnchantment {
         }
     }
 
-    public void unregisterEnchantment(){
+    public void unregisterEnchantment(Enchantment enchantment){
         try{
             Field byKeyField = Enchantment.class.getDeclaredField("byKey");
             Field byNameField = Enchantment.class.getDeclaredField("byName");
@@ -106,16 +101,17 @@ public class CEnchantment {
             HashMap<Keyed, Enchantment> byKey = (HashMap<Keyed, Enchantment>) byKeyField.get(null);
             HashMap<String, Enchantment> byName = (HashMap<String, Enchantment>) byNameField.get(null);
 
-            for(Enchantment enchant: enchants){
-                byKey.remove(enchant.getKey());
-                byName.remove(enchant.getName());
-            }
+            byName.remove(enchantment.getName());
+            byKey.remove(enchantment.getKey());
         }catch (Exception ignored){
         }
     }
 
     public void onServerEnable(){
-        registerEnchantment();
-        unregisterEnchantment();
+        registerEnchantment(EXPLOSIVE);
+    }
+
+    public void onServerDisable(){
+        unregisterEnchantment(EXPLOSIVE);
     }
 }

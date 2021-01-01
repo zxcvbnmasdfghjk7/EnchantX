@@ -19,12 +19,12 @@ public class CNE extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new Weapons(this), this);
-        getEnchantment().registerEnchantment();
+        getEnchantment().onServerEnable();
     }
 
     @Override
     public void onDisable() {
-        getEnchantment().unregisterEnchantment();
+        getEnchantment().onServerDisable();
     }
 
     public CEnchantment getEnchantment() {
