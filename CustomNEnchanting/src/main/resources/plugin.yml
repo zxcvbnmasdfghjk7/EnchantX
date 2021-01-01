@@ -1,0 +1,4 @@
+name: CNE
+main: io.github.eddiediamondfire.cne.CNE
+version: dev-SNAPSHOT
+author: EddieDiamondFire
