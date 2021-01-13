@@ -1,7 +1,8 @@
-package io.github.eddiediamondfire.cne;
+package io.github.eddiediamondfire.cne.enchantments.core;
 
+import io.github.eddiediamondfire.cne.CNE;
 import io.github.eddiediamondfire.cne.enchantments.Explosive;
-import io.github.eddiediamondfire.cne.wrapper.Enchant;
+import lombok.Getter;
 import org.bukkit.Keyed;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -10,27 +11,25 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class CEnchantment {
-
     private final CNE plugin;
+    private final CustomEntity customEntity;
+    private @Getter Map<String, Enchantment> enchants;
     private static final String[] NUMERALS = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
 
     public final static Enchantment EXPLOSIVE = new Explosive();
 
     public CEnchantment(CNE plugin){
         this.plugin = plugin;
+        this.customEntity = new CustomEntity(plugin);
+        this.enchants = new HashMap<>();
     }
 
-    /**
-     * @return Checks if the item contains this type of Enchantment. Note: ItemMeta.hasEnchant() may also work for this function.
-     * It may serve as a replacement but ItemMeta.hasEnchant() but it may break if ItemMeta.hasEnchant() is used to check a Custom Enchantment from another Plugin WARNING!
-     * @param item Gets the item on the players hand.
-     * @param enchant Gets the enchantment where they need to check if it contains the enchantment.
-     */
-    public static boolean hasEnchantment(ItemStack item, Enchantment enchant){
+    public boolean hasEnchantment(ItemStack item, Enchantment enchant){
         if(item.getItemMeta() != null) {
             item.getItemMeta().getEnchants();
             if (item.getItemMeta().getEnchants().size() > 0) {
-                for (Map.Entry<Enchantment, Integer> e : item.getItemMeta().getEnchants().entrySet()) {
+                for (Iterator<Map.Entry<Enchantment, Integer>> loop = item.getItemMeta().getEnchants().entrySet().iterator(); loop.hasNext(); ) {
+                    Map.Entry<Enchantment, Integer> e = loop.next();
                     if (e.getKey().equals(enchant)) {
                         return true;
                     }
@@ -40,19 +39,14 @@ public class CEnchantment {
         return false;
     }
 
-    /**
-     * @return Returns the Level of the Custom Enchantment that is allowed by the Enchantment.getMaxLevel().
-     * ItemMeta.getEnchantLevel() may work for this function. It may break if this plugin is used to get the Custom Enchantment from another plugin WARNING!
-     * @param item Gets the item on the players hand.
-     * @param enchant Identifies the enchantment so it can identify the Enchantment Level.
-    ;     */
-    public static int getLevel(ItemStack item, Enchantment enchant){
+    public int getLevel(ItemStack item, Enchantment enchant){
         if(item.getItemMeta() != null) {
             item.getItemMeta().getEnchants();
             if (item.getItemMeta().getEnchants().size() > 0) {
-                for (Map.Entry<Enchantment, Integer> e : item.getItemMeta().getEnchants().entrySet()) {
-                    if (e.getKey().equals(enchant)) {
-                        return e.getValue();
+                for(Iterator<Map.Entry<Enchantment, Integer>> loop = item.getItemMeta().getEnchants().entrySet().iterator(); loop.hasNext(); ){
+                    Map.Entry<Enchantment, Integer> enchantment = loop.next();
+                    if(enchantment.getKey().equals(enchant)){
+                        return enchantment.getValue();
                     }
                 }
             }
@@ -60,7 +54,7 @@ public class CEnchantment {
         return 0;
     }
 
-    public static String returnEnchantmentName(Enchantment ench, int enchLevel){
+    public String returnEnchantmentName(Enchantment ench, int enchLevel){
         if(enchLevel == 1 && ench.getMaxLevel() == 1){
             return ench.getName();
         }
@@ -90,6 +84,7 @@ public class CEnchantment {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void unregisterEnchantment(Enchantment enchantment){
         try{
             Field byKeyField = Enchantment.class.getDeclaredField("byKey");
@@ -109,9 +104,22 @@ public class CEnchantment {
 
     public void onServerEnable(){
         registerEnchantment(EXPLOSIVE);
+        enchants.put("explosive", CEnchantment.EXPLOSIVE);
+
     }
 
     public void onServerDisable(){
         unregisterEnchantment(EXPLOSIVE);
+    }
+
+    public Enchantment getEnchantmentFromString(String name){
+        if(name != null){
+            return enchants.get(name);
+        }
+        return null;
+    }
+
+    public CustomEntity getCustomEntity() {
+        return customEntity;
     }
 }
