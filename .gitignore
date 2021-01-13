@@ -21,3 +21,23 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+.gradle
+.idea/modules
+.idea/compiler.xml
+.idea/discord.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
+CustomNEnchanting/build
+CustomNEnchanting-api/build
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+*.bin
+.gradle/6.7.1
+.gradle/buildOutputCleanup
+.gradle/checksums
+.gradle/configuration-cache
+.gradle/vcs-1
