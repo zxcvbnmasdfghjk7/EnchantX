@@ -1,7 +1,13 @@
+    public static EnchantX plugin;
+    private final CEnchant CEnchant;
+    private final CommandManager commandManager;
     private final TomlManager tomlManager;
     public boolean isPaper;
     private Toml configFile = null;
+
     public EnchantX(){
+        CEnchant = new CEnchant(this);
+        commandManager = new CommandManager(this);
         tomlManager = new TomlManager(this);
     }
 
