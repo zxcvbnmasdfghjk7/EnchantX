@@ -1,0 +1,13 @@
+repositories{
+    maven{
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven{
+        url = "https://papermc.io/repo/repository/maven-public/"
+    }
+}
+
+dependencies{
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:paper-api:1.16.5-R0.1-SNAPSHOT'
+}
