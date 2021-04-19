@@ -1,3 +1,12 @@
+    private final TomlManager tomlManager;
+    public boolean isPaper;
+    private Toml configFile = null;
+    public EnchantX(){
+        tomlManager = new TomlManager(this);
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(EnchantX.class);
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -9,6 +18,10 @@
         }catch(ClassNotFoundException ex){
             isPaper = false;
         }
+
+        // Load data files
+        logger.info("Loading configuration file");
+        configFile = tomlManager.getTomlFile("config");
     }
     @Override
     public void onDisable() {
