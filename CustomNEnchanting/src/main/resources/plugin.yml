@@ -1,9 +1,0 @@
-name: CNE
-main: io.github.eddiediamondfire.cne.CNE
-version: dev-SNAPSHOT
-author: EddieDiamondFire
-api-version: 1.16
-commands:
-  cne:
-    description: main command.
-    usage: /cne <subcommand>
