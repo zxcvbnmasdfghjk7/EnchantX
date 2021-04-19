@@ -36,10 +36,13 @@ subprojects{
 
     ext {
         JUNIT_VERSION = '4.13'
+        SLF4J_VERSION = '1.7.30'
     }
 
     dependencies{
         implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+        implementation "org.slf4j:slf4j-api:${SLF4J_VERSION}"
+        implementation "org.slf4j:slf4j-log4j12:${SLF4J_VERSION}"
         testCompile "junit:junit:${JUNIT_VERSION}"
     }
 }
