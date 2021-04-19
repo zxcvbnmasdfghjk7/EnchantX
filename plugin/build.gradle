@@ -9,5 +9,6 @@ repositories{
 
 dependencies{
     implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
-    implementation 'org.spigotmc:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'com.moandjiezana.toml:toml4j:0.7.1'
 }
