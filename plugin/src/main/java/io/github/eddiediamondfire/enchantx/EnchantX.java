@@ -1,3 +1,15 @@
+package io.github.eddiediamondfire.enchantx;
+
+import com.moandjiezana.toml.Toml;
+import io.github.eddiediamondfie.enchantx.command.CommandManager;
+import io.github.eddiediamondfie.enchantx.listener.PernEnchantment;
+import io.github.eddiediamondfire.enchantx.datahandler.TomlManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class EnchantX extends JavaPlugin {
+
     public static EnchantX plugin;
     private final CEnchant CEnchant;
     private final CommandManager commandManager;
