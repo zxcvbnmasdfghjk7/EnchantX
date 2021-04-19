@@ -22,7 +22,28 @@
         // Load data files
         logger.info("Loading configuration file");
         configFile = tomlManager.getTomlFile("config");
+
+        // Load Enchantments
+        logger.info("Registering Enchantments");
+        loadEnchantments();
+
+        // Register Listeners
+        logger.info("Registering Event Listeners");
+        getServer().getPluginManager().registerEvents(new PernEnchantment(this), this);
+    }
+
+    private void loadEnchantments(){
+        CEnchant.registerCustomEnchantment(io.github.eddiediamondfire.enchantx.CEnchant.PERN_ENCHANTMENT);
     }
     @Override
     public void onDisable() {
     }
+
+    public CEnchant getEnchantManager() {
+        return CEnchant;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
+}
