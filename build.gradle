@@ -1,6 +1,6 @@
 buildscript {
     ext{
-        dependencyManagerVersion = '1.0.11.RELEASE' as Object
+        dependencyManagerVersion = '1.1.0' as Object
     }
     repositories {
         mavenCentral()
